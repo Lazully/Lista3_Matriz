@@ -1,0 +1,67 @@
+internal class Program
+{
+    static void Main(string[] args)
+    {
+        int tam = 10;
+        int[,] campo = new int[tam, tam];
+
+        //iniciar a matriz com 0
+        for(int i = 0; i<campo.GetLength(2); i++)
+        {
+            for (int j = 0; j < campo.GetLength(2); j++)
+                campo[i, j] = 0;
+        }
+        Console.WriteLine("A seguir, entre com as coordenadas usando números de 1 à 9. ");
+        //pedir coordenadas
+        for(int i = 0; i < tam; i++)
+        {
+            Console.WriteLine($"Entre com a coordenada X, vez {i}: ");
+            int x = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine($"Entre com a coordenada Y, vez {i}: ");
+            int y = Convert.ToInt32(Console.ReadLine());
+
+            campo[x,y] = -1;
+        }
+
+        //exibir matriz
+        for(int i = 0; i < campo.GetLength(0); i++) 
+        {
+            Console.WriteLine();
+            for(int j = 0; j < campo.GetLength(1); j++)
+            {
+                if (campo[i, j] == -1)
+                {
+                    Console.WriteLine("X ");
+                }
+                else
+                    Console.WriteLine("Y ");
+            }
+        }
+    }
+
+    public static void UpdateVizinhos(int[,] m, int x, int y)
+    {
+        int inicioX = x = 1;
+        int inicioY = y + 1;
+        int fimX = x + 1;
+        int fimY = y + 1;
+
+        for(int i = inicioX; i < fimX; i++)
+        {
+            for(int j = inicioY; j < fimY; j++)
+            {
+                if((i != x) && (j != y))
+                {
+                    try
+                    {
+                        m[i,j]++;
+                    }
+                    catch
+                    {
+
+                    }
+                }
+            }
+        }
+    }
+}
